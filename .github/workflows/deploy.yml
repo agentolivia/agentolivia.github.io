@@ -20,9 +20,9 @@ jobs:
     env:
       DART_SASS_VERSION: 1.97.1
       GO_VERSION: 1.25.5
-      HUGO_VERSION: 0.154.2
+      HUGO_VERSION: 0.155.3
       NODE_VERSION: 24.12.0
-      TZ: Europe/Oslo
+      TZ: America/Los_Angeles
     steps:
       - name: Checkout
         uses: actions/checkout@v5
