@@ -1,7 +1,7 @@
 # Change baseurl before deploy
-baseurl      = "https://starter.stack.jimmycai.com/"
+baseurl      = "https://agentolivia.github.io/"
 languageCode = "en-us"
-title        = "Hugo Theme Stack Starter"
+title        = "Not That Kind of Agent"
 
 # Theme i18n support
 # See all available values at https://github.com/CaiJimmy/hugo-theme-stack/tree/master/i18n

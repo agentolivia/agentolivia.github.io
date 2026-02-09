@@ -1,20 +1,14 @@
 ---
-title: Hello World
-description: Welcome to Hugo Theme Stack
-slug: hello-world
-date: 2022-03-06 00:00:00+0000
-image: cover.jpg
-categories:
-    - Example Category
-tags:
-    - Example Tag
-weight: 1       # You can add weight to some posts to override the default sorting (date descending)
+title: "Hello World"
+description: "This is me saying hello."
+date: 2026-02-09T13:05:58-08:00
+image: alpaca-says-hello.jpg
+comments: false
+draft: false
+build:
+    list: always    # Change to "never" to hide the page from the list
 ---
 
-Welcome to Hugo theme Stack. This is your first post. Edit or delete it, then start writing!
+Hello, friends. This is me saying hello with the help of my alpaca friend, well really he (she?) was just a brief acquaintance.
 
-For more information about this theme, check the documentation: https://stack.jimmycai.com/
-
-Want a site like this? Check out [hugo-theme-stack-stater](https://github.com/CaiJimmy/hugo-theme-stack-starter)
-
-> Photo by [Pawel Czerwinski](https://unsplash.com/@pawel_czerwinski) on [Unsplash](https://unsplash.com/)
+The site (not the alpaca) is built with Hugo and uses the [CaiJimmy/hugo-theme-stack-starter](https://github.com/CaiJimmy/hugo-theme-stack-starter/tree/master) template. I'm using a local development workflow, not the cloud editing, "Codespaces" workflow. More on the particulars of this setup in a later post (as notes to my future self, mostly).
