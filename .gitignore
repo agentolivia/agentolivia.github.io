@@ -3,3 +3,18 @@ resources
 .hugo_build.lock
 .DS_Store
 assets/jsconfig.json
+
+# Dependencies
+node_modules/
+
+# Package manager files
+package-lock.json  # if you're using npm
+yarn.lock         # if you're using yarn
+pnpm-lock.yaml    # if you're using pnpm
+
+# Editor directories
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
