@@ -70,7 +70,7 @@ To set up the site for local development, I did the following steps:
 
 1. `cd ~/Sites`
 1. `git clone git@github.com:<username>/<username>.github.io.git`
-1. `cd agentolivia.github.io`
+1. `cd <username>.github.io`
 1. `git submodule update --init --recursive`
 
 ### Change the master branch to main
