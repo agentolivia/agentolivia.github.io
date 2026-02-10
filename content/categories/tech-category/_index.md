@@ -1,6 +1,6 @@
 ---
-title: Example Category
-description: A description of this category
+title: "Category: Tech"
+description: Nerd stuff on computers.
 image:
 
 # Badge style

@@ -7,6 +7,11 @@ comments: false
 draft: false
 build:
     list: always    # Change to "never" to hide the page from the list
+categories:
+    - Tech
+tags:
+    - General
+    - My Photography
 ---
 
 Hello, friends. This is me saying hello with the help of my alpaca friend, well really he (she?) was just a brief acquaintance.

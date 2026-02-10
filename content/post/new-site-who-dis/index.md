@@ -7,6 +7,13 @@ draft: false
 comments: false
 build:
     list: always    # Change to "never" to hide the page from the list
+categories:
+    - Tech
+tags:
+    - Hugo
+    - GitHub
+    - GitHub Actions
+    - tutorial
 ---
 
 Used Claude.ai to help me choose a template for my Hugo site. [Hugo](https://gohugo.io/) is a static site generator. My prompt:
