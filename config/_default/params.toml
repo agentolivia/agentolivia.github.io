@@ -18,7 +18,7 @@ SortBy              = "default"
     lastUpdated = ":date_full"
 
 [sidebar]
-    emoji    = "🪗"
+    emoji    = "🐐"
     subtitle = "The personal site of agentolivia aka Amber Matz."
     avatar   = "img/ambermatz_headshot_square_150px.png"
 
