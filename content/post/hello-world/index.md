@@ -1,17 +1,17 @@
 ---
-title: "Hello World"
-description: "This is me saying hello."
+title: 'Hello World'
+description: 'This is me saying hello.'
 date: 2026-02-09T13:05:58-08:00
 image: alpaca-says-hello.jpg
 comments: false
 draft: false
 build:
-    list: always    # Change to "never" to hide the page from the list
+  list: always # Change to "never" to hide the page from the list
 categories:
-    - Tech
+  - Tech
 tags:
-    - General
-    - My Photography
+  - General
+  - My Photography
 ---
 
 Hello, friends. This is me saying hello with the help of my alpaca friend, well really he (she?) was just a brief acquaintance.

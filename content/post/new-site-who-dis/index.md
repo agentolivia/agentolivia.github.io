@@ -1,28 +1,29 @@
 ---
-title: "New Site, Who Dis"
-description: 
+title: 'New Site, Who Dis'
+description:
 date: 2026-02-09T15:18:13-08:00
 image: screenshot-new-site-who-dis-commit.png
 draft: false
 comments: false
 build:
-    list: always    # Change to "never" to hide the page from the list
+  list: always # Change to "never" to hide the page from the list
 categories:
-    - Tech
+  - Tech
 tags:
-    - Hugo
-    - GitHub
-    - GitHub Actions
-    - tutorial
+  - Hugo
+  - GitHub
+  - GitHub Actions
+  - tutorial
 ---
 
 Used Claude.ai to help me choose a template for my Hugo site. [Hugo](https://gohugo.io/) is a static site generator. My prompt:
 
 > Help me pick a theme for my personal site running Hugo.
+>
 > - Actively maintained
 > - Accommodates blog posts that can have text, images, YouTube videos embedded.
 > - Responsive layout and typography
-> Nice to have: a gallery layout. Bonus points if it can integrate with Flickr easily.
+>   Nice to have: a gallery layout. Bonus points if it can integrate with Flickr easily.
 
 [Claude](https://claude.ai/) recommended Stack, which I agreed with, based on some extensive theme evaluation I had done the previous week.
 
@@ -32,9 +33,9 @@ The [Stack](https://themes.gohugo.io/themes/hugo-theme-stack/) theme, self-descr
 
 The Stack theme repo lives at GitHub: [CaiJimmy/hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack). The Quickstart process, using the template at [CaiJimmy/hugo-theme-stack-starter](https://github.com/CaiJimmy/hugo-theme-stack-starter), assumes you are starting a brand new site.
 
-- It uses [Hugo modules](https://gohugo.io/hugo-modules/) feature to load the theme. This means that the theme is downloaded to Hugo's cache directory and is not visible in your repo. Contrast that with the `git submodule` approach for adding a theme which adds theme code to the *themes* directory and is managed with `git submodule` commands. (This was a new concept for me.) Hugo modules are managed with `hugo mod` commands, which requires Go.
+- It uses [Hugo modules](https://gohugo.io/hugo-modules/) feature to load the theme. This means that the theme is downloaded to Hugo's cache directory and is not visible in your repo. Contrast that with the `git submodule` approach for adding a theme which adds theme code to the _themes_ directory and is managed with `git submodule` commands. (This was a new concept for me.) Hugo modules are managed with `hugo mod` commands, which requires Go.
 - It comes with a basic theme structure and configuration.
-- A GitHub action (*.github/workflows/deploy.yml*) has been set up to deploy the theme to a public GitHub page automatically. 
+- A GitHub action (_.github/workflows/deploy.yml_) has been set up to deploy the theme to a public GitHub page automatically.
 - Also, there's a cron job to update the theme automatically everyday.
 
 ## Goal
@@ -43,7 +44,7 @@ Create new Hugo site based on [CaiJimmy/hugo-theme-stack-starter](https://github
 
 ## Notes
 
-The default branch on *CaiJimmy/hugo-theme-stack-starter* is `master` and I want to change that to `main`. That will mean a few extra steps.
+The default branch on _CaiJimmy/hugo-theme-stack-starter_ is `master` and I want to change that to `main`. That will mean a few extra steps.
 
 ## Local dev vs. cloud editing
 
@@ -80,61 +81,63 @@ To set up the site for local development, I did the following steps:
 
 ### Back on GitHub
 
-1. On the repo page, click *Settings*
+1. On the repo page, click _Settings_
 1. Under Settings: Default branch > Switch (arrows icon) > `main`
 
 ### Back on Mac, in Terminal window:
 
 1. `git push origin --delete master`
 
-What we have right now is a broken build which will be fixed by updating *.github/workflows/deploy.yml*.
+What we have right now is a broken build which will be fixed by updating _.github/workflows/deploy.yml_.
 
 ### Edit deploy.yml
 
-1. In code editor of choice, open for editing *.github/workflows/deploy.yml*
+1. In code editor of choice, open for editing _.github/workflows/deploy.yml_
 
-    > Side quest: Install GitHub Actions plugin on VS Code, which popped up when I opened the file in VS Code.
+   > Side quest: Install GitHub Actions plugin on VS Code, which popped up when I opened the file in VS Code.
+
 1. Update the list of branches to match the new default branch, `main`.
 
-    ```yaml
-    name: Build and deploy
-    on:
-    push:
-        branches:
-        - main
-    ...
-    ```
+   ```yaml
+   name: Build and deploy
+   on:
+   push:
+     branches:
+       - main
+   ...
+   ```
+
 1. Update env constants to match local.
 
-    I noticed that when I checked out the versions I had locally installed, they were a bit different than what was listed in *deploy.yml*.
+   I noticed that when I checked out the versions I had locally installed, they were a bit different than what was listed in _deploy.yml_.
 
-    ```shell
-    # hugo
-    hugo version
-    hugo v0.155.3+extended+withdeploy darwin/arm64 BuildDate=2026-02-08T16:40:42Z VendorInfo=Homebrew
-    
-    # go
-    go version
-    go version go1.25.7 darwin/arm64
-    
-    # node
-    node --version
-    v24.12.0
-    ```
+   ```shell
+   # hugo
+   hugo version
+   hugo v0.155.3+extended+withdeploy darwin/arm64 BuildDate=2026-02-08T16:40:42Z VendorInfo=Homebrew
 
-    Under `jobs.build.env`, update the version to match the output.
-    
-    ```yaml {hl_lines="6-9"}
-    jobs:
-    build:
-        runs-on: ubuntu-latest
-        env:
-        DART_SASS_VERSION: 1.97.1
-        GO_VERSION: 1.25.7
-        HUGO_VERSION: 0.155.3
-        NODE_VERSION: 24.12.0
-        TZ: America/Los_Angeles
-    ```
+   # go
+   go version
+   go version go1.25.7 darwin/arm64
+
+   # node
+   node --version
+   v24.12.0
+   ```
+
+   Under `jobs.build.env`, update the version to match the output.
+
+   ```yaml {hl_lines="6-9"}
+   jobs:
+   build:
+     runs-on: ubuntu-latest
+     env:
+     DART_SASS_VERSION: 1.97.1
+     GO_VERSION: 1.25.7
+     HUGO_VERSION: 0.155.3
+     NODE_VERSION: 24.12.0
+     TZ: America/Los_Angeles
+   ```
 
 1. Save file and `git add .github/workflows/deploy.yml`
 1. Commit: `git commit -m "Update deploy.yml"
