@@ -4,4 +4,23 @@ services:
 
     commands:
       init:
-        - echo "Preview ready for testing"
+        # Install Go
+        - curl -Ls https://go.dev/dl/go1.25.7.linux-amd64.tar.gz | tar -C /usr/local -xzf -
+        - export PATH=$PATH:/usr/local/go/bin
+
+        # Install Hugo Extended
+        - curl -Ls https://github.com/gohugoio/hugo/releases/download/v0.155.3/hugo_extended_0.155.3_Linux-64bit.tar.gz | tar -C /usr/local/bin -zxf - hugo
+
+        # Verify installations
+        - go version
+        - hugo version
+
+      build:
+        # Set up environment path
+        - export PATH=$PATH:/usr/local/go/bin
+
+        # Build the site
+        - cd "${TUGBOAT_ROOT}" && hugo --gc --minify
+
+        # Link the generated public directory to Apache's document root
+        - ln -snf "${TUGBOAT_ROOT}/public" "${DOCROOT}"
