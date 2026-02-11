@@ -1,0 +1,17 @@
+# Dependencies
+node_modules
+
+# Vale styles and config
+.vale/
+.vale.ini
+
+# Dev/CI config
+.devcontainer/
+.vscode/
+
+# Hugo build output
+public/
+resources/
+
+# Other
+.DS_Store
