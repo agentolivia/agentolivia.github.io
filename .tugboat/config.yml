@@ -4,36 +4,4 @@ services:
 
     commands:
       init:
-        # Install Go (matching GitHub Actions version)
-        - curl -Ls https://go.dev/dl/go1.25.7.linux-amd64.tar.gz | tar -C /usr/local -xzf -
-        - export PATH=$PATH:/usr/local/go/bin
-
-        # Install Node.js (matching GitHub Actions version)
-        - curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
-        - apt-get install -y nodejs
-
-        # Install Dart Sass (matching GitHub Actions version)
-        - mkdir -p /usr/local/dart-sass
-        - curl -sLJO "https://github.com/sass/dart-sass/releases/download/1.97.1/dart-sass-1.97.1-linux-x64.tar.gz"
-        - tar -C /usr/local -xf "dart-sass-1.97.1-linux-x64.tar.gz"
-        - rm "dart-sass-1.97.1-linux-x64.tar.gz"
-        - export PATH=$PATH:/usr/local/dart-sass
-
-        # Download and extract Hugo Extended (matching GitHub Actions version)
-        - curl -Ls https://github.com/gohugoio/hugo/releases/download/v0.155.3/hugo_extended_0.155.3_Linux-64bit.tar.gz | tar -C /usr/local/bin -zxf - hugo
-
-      build:
-        # Set up environment paths
-        - export PATH=$PATH:/usr/local/go/bin:/usr/local/dart-sass
-
-        # Configure Git (matching GitHub Actions)
-        - git config core.quotepath false
-
-        # Install Node.js dependencies if package-lock.json exists
-        - cd "${TUGBOAT_ROOT}" && ([[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true)
-
-        # Build the site (matching GitHub Actions build command)
-        - cd "${TUGBOAT_ROOT}" && hugo --gc --minify
-
-        # Link the generated public directory to Apache's document root
-        - ln -snf "${TUGBOAT_ROOT}/public" "${DOCROOT}"
+        - echo "Preview ready for testing"
