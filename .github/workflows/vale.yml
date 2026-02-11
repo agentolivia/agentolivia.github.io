@@ -1,0 +1,25 @@
+name: Review
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  vale:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Vale
+        uses: errata-ai/vale-action@reviewdog
+        with:
+          files: content
+          fail_on_error: true
+          vale_flags: '--config=.vale.ini'
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
