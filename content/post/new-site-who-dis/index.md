@@ -84,7 +84,7 @@ To set up the site for local development, I did the following steps:
 1. On the repo page, click _Settings_
 1. Under Settings: Default branch > Switch (arrows icon) > `main`
 
-### Back on Mac, in Terminal window:
+### Back on Mac, in Terminal window
 
 1. `git push origin --delete master`
 
@@ -149,7 +149,7 @@ What we have right now is a broken build which will be fixed by updating _.githu
 
 ### View live site
 
-1. Visit GitHub pages site. For me this is at https://agentolivia.github.io.
+1. Visit GitHub pages site. For me this is at <https://agentolivia.github.io>.
 1. It should be live with the starter template's demo content.
 
 I'm now ready to customize the site, unpublish the default content, and add some new posts. (Hey, this is one of them, so I succeeded!)
