@@ -23,17 +23,17 @@ Used Claude.ai to help me choose a template for my Hugo site. [Hugo](https://goh
 > - Actively maintained
 > - Accommodates blog posts that can have text, images, YouTube videos embedded.
 > - Responsive layout and typography
->   Nice to have: a gallery layout. Bonus points if it can integrate with Flickr easily.
+>   Nice to have: a gallery layout. Bonus points if it can integrate with Flickr.
 
 [Claude](https://claude.ai/) recommended Stack, which I agreed with, based on some extensive theme evaluation I had done the previous week.
 
-> Hugo Stack — This is my top pick for you. It's actively maintained (last updated January 2026), has 6,200+ GitHub stars, and includes PhotoSwipe integration for galleries with lightbox functionality. The card-style layout works beautifully for blog posts with mixed media, supports lazy-loading images, has dark mode, and handles YouTube embeds well. The responsive typography is clean and modern.
+> Hugo Stack—This is my top pick for you. It's actively maintained (last updated January 2026), has 6,200+ GitHub stars, and includes PhotoSwipe integration for galleries with lightbox functionality. The card-style layout works beautifully for blog posts with mixed media, supports lazy-loading images, has dark mode, and handles YouTube embeds well. The responsive typography is clean and modern.
 
-The [Stack](https://themes.gohugo.io/themes/hugo-theme-stack/) theme, self-described as "Card-style Hugo theme designed for bloggers", doesn't use the typical Hugo [quickstart process](https://gohugo.io/getting-started/quick-start/) for adding a theme to an existing repo using `git submodule add...`. Since this site is brand new, I was okay with starting from scratch.
+The [Stack](https://themes.gohugo.io/themes/hugo-theme-stack/) theme, self-described as "Card-style Hugo theme designed for bloggers," doesn't use the typical Hugo [quickstart process](https://gohugo.io/getting-started/quick-start/) for adding a theme to an existing repo using `git submodule add...`. Since this site is brand new, I was okay with starting from scratch.
 
 The Stack theme repo lives at GitHub: [CaiJimmy/hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack). The Quickstart process, using the template at [CaiJimmy/hugo-theme-stack-starter](https://github.com/CaiJimmy/hugo-theme-stack-starter), assumes you are starting a brand new site.
 
-- It uses [Hugo modules](https://gohugo.io/hugo-modules/) feature to load the theme. This means that the theme is downloaded to Hugo's cache directory and is not visible in your repo. Contrast that with the `git submodule` approach for adding a theme which adds theme code to the _themes_ directory and is managed with `git submodule` commands. (This was a new concept for me.) Hugo modules are managed with `hugo mod` commands, which requires Go.
+- It uses [Hugo modules](https://gohugo.io/hugo-modules/) feature to load the theme. This means that the theme is downloaded to Hugo's cache directory and isn't visible in your repo. Contrast that with the `git submodule` approach for adding a theme which adds theme code to the _themes_ directory and is managed with `git submodule` commands. (This was a new concept for me.) Hugo modules are managed with `hugo mod` commands, which requires Go.
 - It comes with a basic theme structure and configuration.
 - A GitHub action (_.github/workflows/deploy.yml_) has been set up to deploy the theme to a public GitHub page automatically.
 - Also, there's a cron job to update the theme automatically everyday.
@@ -46,7 +46,7 @@ Create new Hugo site based on [CaiJimmy/hugo-theme-stack-starter](https://github
 
 The default branch on _CaiJimmy/hugo-theme-stack-starter_ is `master` and I want to change that to `main`. That will mean a few extra steps.
 
-## Local dev vs. cloud editing
+## Local development vs. cloud editing
 
 I watched the video tutorial at [CaiJimmy/hugo-theme-stack-starter](https://github.com/CaiJimmy/hugo-theme-stack-starter). This demonstrates using GitHub's Codespaces cloud editor. I decided to use a local development workflow since I am comfortable with that. Going the local development route means I'll need the following dependencies installed on my Mac:
 
@@ -74,7 +74,7 @@ To set up the site for local development, I did the following steps:
 1. `cd <username>.github.io`
 1. `git submodule update --init --recursive`
 
-### Change the master branch to main
+### Change the `master` branch to `main`
 
 1. `git branch -m master main`
 1. `git push -u origin main`
@@ -107,7 +107,7 @@ What we have right now is a broken build which will be fixed by updating _.githu
    ...
    ```
 
-1. Update env constants to match local.
+1. Update environment constants to match local.
 
    I noticed that when I checked out the versions I had locally installed, they were a bit different than what was listed in _deploy.yml_.
 

@@ -2,7 +2,7 @@ Tugboat
 Lullabot
 Osio
 Drupalize.Me
-GitHub
+codespace
 Codespaces
 JavaScript
 React
@@ -13,3 +13,6 @@ frontmatter
 shortcodes
 blockquote
 Unsplash
+cron
+Flickr
+lightbox
