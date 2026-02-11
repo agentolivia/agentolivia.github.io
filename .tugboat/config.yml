@@ -11,8 +11,11 @@ services:
         - hugo version
 
       build:
-        # Change to docroot directory where hugo.toml lives and build site
-        - cd "${TUGBOAT_ROOT}" && hugo
+        # Install Go modules (required for Hugo Stack theme)
+        - cd "${TUGBOAT_ROOT}" && hugo mod get
+
+        # Build the site
+        - cd "${TUGBOAT_ROOT}" && hugo --minify
 
         # Link the generated public directory to Apache's document root
         - ln -snf "${TUGBOAT_ROOT}/public" "${DOCROOT}"
