@@ -1,0 +1,18 @@
+services:
+  apache:
+    image: tugboatqa/httpd
+
+    commands:
+      init:
+        # Download and extract hugo
+        - curl -Ls https://github.com/gohugoio/hugo/releases/download/v0.155.3/hugo_extended_0.155.3_Linux-64bit.tar.gz | tar -C /usr/local/bin -zxf - hugo
+
+        # Verify Hugo installation
+        - hugo version
+
+      build:
+        # Change to docroot directory where hugo.toml lives and build site
+        - cd "${TUGBOAT_ROOT}" && hugo
+
+        # Link the generated public directory to Apache's document root
+        - ln -snf "${TUGBOAT_ROOT}/public" "${DOCROOT}"
