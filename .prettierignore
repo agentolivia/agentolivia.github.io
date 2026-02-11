@@ -1,3 +1,6 @@
+# Go module read-only vendor
+_vendor
+
 # Dependencies
 node_modules
 
