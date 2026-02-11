@@ -15,11 +15,10 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Set up Vale
+      - name: Run Vale
         uses: errata-ai/vale-action@v2
         with:
           files: content
           fail_on_error: true
-          vale_flags: '--config=.vale.ini'
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
