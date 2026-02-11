@@ -1,0 +1,24 @@
+{
+    "name": "agentolivia.github.io",
+    "version": "1.0.0",
+    "description": "Packages for agentolivia.github.io",
+    "homepage": "https://github.com/agentolivia/agentolivia.github.io#readme",
+    "bugs": {
+        "url": "https://github.com/agentolivia/agentolivia.github.io/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/agentolivia/agentolivia.github.io.git"
+    },
+    "license": "MIT",
+    "author": "Amber Matz (agentolivia)",
+    "scripts": {
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "lint": "vale .",
+        "lint:content": "vale content/"
+    },
+    "devDependencies": {
+        "prettier": "^3.8.1"
+    }
+}
