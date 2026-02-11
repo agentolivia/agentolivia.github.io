@@ -9,3 +9,7 @@ React
 Vale
 unpublish
 repo
+frontmatter
+shortcodes
+blockquote
+Unsplash
