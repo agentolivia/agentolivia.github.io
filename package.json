@@ -16,9 +16,12 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "review": "vale .",
-    "review:content": "vale content/"
+    "review:content": "vale content/",
+    "lint:markdown": "markdownlint-cli2 '**/*.md'",
+    "lint:markdown:fix": "markdownlint-cli2 --fix '**/*.md'"
   },
   "devDependencies": {
+    "markdownlint-cli2": "^0.20.0",
     "prettier": "^3.8.1"
   }
 }
