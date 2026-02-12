@@ -26,5 +26,5 @@ jobs:
       - name: Run Prettier check
         run: npm run format:check
 
-      - name: Run Markdown linting
+      - name: Run Markdown check
         run: npm run lint:markdown

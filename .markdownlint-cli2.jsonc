@@ -1,0 +1,12 @@
+{
+  "ignores": [
+    "node_modules",
+    "_vendor",
+    ".vale",
+    ".devcontainer",
+    ".vscode",
+    "public",
+    "resources",
+    ".DS_Store",
+  ],
+}
