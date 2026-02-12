@@ -6,7 +6,7 @@
   <head>
     {{- partial "head/head.html" . -}} {{- block "head" . -}}{{ end }}
   </head>
-  <body class="bg-hot-pink-goats {{ block `body-class` . }}{{ end }}">
+  <body class="bg-pink-goats {{ block `body-class` . }}{{ end }}">
     {{- partial "head/colorScheme" . -}} {{/* The container is wider when
     there's any activated widget */}} {{- $hasWidget := false -}} {{- range
     .Site.Params.widgets -}} {{- if gt (len .) 0 -}} {{- $hasWidget = true -}}
