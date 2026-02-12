@@ -2,6 +2,9 @@ services:
   apache:
     image: tugboatqa/httpd
 
+    urls:
+      - /
+
     commands:
       init:
         # Install Go and verify
