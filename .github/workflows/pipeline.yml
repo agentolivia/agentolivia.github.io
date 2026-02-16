@@ -10,8 +10,11 @@ jobs:
   lint:
     uses: ./.github/workflows/lint.yml
 
+  security:
+    uses: ./.github/workflows/security.yml
+
   deploy:
-    needs: [lint]
+    needs: [lint, security]
     permissions:
       contents: read
       pages: write
