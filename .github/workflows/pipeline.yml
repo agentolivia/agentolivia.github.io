@@ -16,4 +16,5 @@ jobs:
       contents: read
       pages: write
       id-token: write
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy.yml
