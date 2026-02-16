@@ -12,4 +12,8 @@ jobs:
 
   deploy:
     needs: [lint]
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     uses: ./.github/workflows/deploy.yml
