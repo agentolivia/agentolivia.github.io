@@ -1,3 +1,163 @@
-/*
-    You can add your own custom styles here.
-*/
+/* assets/scss/custom.scss */
+/* ============================================
+   LIGHT MODE BACKGROUNDS
+   ============================================ */
+
+/* Option 1: Pink Goat Wallpaper */
+.bg-pink-goats {
+  background-color: #ffb3d9;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 35px,
+      rgba(255, 255, 255, 0.1) 35px,
+      rgba(255, 255, 255, 0.1) 70px
+    ),
+    url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='25' font-size='20'%3E🐐%3C/text%3E%3C/svg%3E");
+  background-size:
+    auto,
+    40px 40px;
+}
+
+/* Option 2: Pixelated Stars */
+.bg-pixel-stars {
+  background-color: #ff69b4;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='5' y='20' font-size='18'%3E⭐%3C/text%3E%3Ctext x='35' y='45' font-size='14'%3E✨%3C/text%3E%3Ctext x='45' y='15' font-size='12'%3E⭐%3C/text%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+
+/* Option 3: Pixel Hearts */
+.bg-pixel-hearts {
+  background-color: #ffc0cb;
+  background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='5' y='20' font-size='16'%3E💗%3C/text%3E%3C/svg%3E");
+  background-size: 20px 20px;
+}
+
+/* Option 4: Hot Pink Goats with Stripes */
+.bg-hot-pink-goats {
+  background-color: #ff1493;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 50px,
+      rgba(255, 255, 255, 0.1) 50px,
+      rgba(255, 255, 255, 0.1) 100px
+    ),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='30' font-size='24'%3E🐐%3C/text%3E%3Ctext x='35' y='55' font-size='24'%3E🐐%3C/text%3E%3C/svg%3E");
+  background-size:
+    auto,
+    60px 60px;
+}
+
+@keyframes scroll {
+  0% {
+    background-position:
+      0 0,
+      30px 30px,
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      60px 60px,
+      90px 90px,
+      50px 50px,
+      0 0;
+  }
+}
+
+/* ============================================
+   DARK MODE BACKGROUNDS
+   ============================================ */
+
+:root[data-scheme='dark'] {
+  /* Dark Mode: Pink Goat Wallpaper → Deep Purple Goats */
+  .bg-pink-goats {
+    background-color: #2d1b3d;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 35px,
+        rgba(138, 43, 226, 0.15) 35px,
+        rgba(138, 43, 226, 0.15) 70px
+      ),
+      url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='25' font-size='20'%3E🐐%3C/text%3E%3C/svg%3E");
+    background-size:
+      auto,
+      40px 40px;
+  }
+
+  /* Dark Mode: Pixel Stars → Dark sky with bright stars */
+  .bg-pixel-stars {
+    background-color: #1a1a2e;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='5' y='20' font-size='18'%3E⭐%3C/text%3E%3Ctext x='35' y='45' font-size='14'%3E✨%3C/text%3E%3Ctext x='45' y='15' font-size='12'%3E🌟%3C/text%3E%3C/svg%3E");
+    background-size: 60px 60px;
+  }
+
+  /* Dark Mode: Pixel Hearts → Dark with purple hearts */
+  .bg-pixel-hearts {
+    background-color: #1e1e1e;
+    background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='5' y='20' font-size='16'%3E💜%3C/text%3E%3C/svg%3E");
+    background-size: 20px 20px;
+  }
+
+  /* Dark Mode: Hot Pink Goats → Deep Teal Goats */
+  .bg-hot-pink-goats {
+    background-color: #0f4c5c;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 50px,
+        rgba(159, 226, 191, 0.1) 50px,
+        rgba(159, 226, 191, 0.1) 100px
+      ),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='30' font-size='24'%3E🐐%3C/text%3E%3Ctext x='35' y='55' font-size='24'%3E🐐%3C/text%3E%3C/svg%3E");
+    background-size:
+      auto,
+      60px 60px;
+  }
+}
+
+/* ============================================
+   SHARED STYLES FOR READABILITY
+   ============================================ */
+
+/* Light mode - keep content readable */
+.bg-pink-goats,
+.bg-pixel-stars,
+.bg-pixel-hearts,
+.bg-hot-pink-goats,
+.bg-geocities {
+  .article-list,
+  article,
+  aside,
+  footer {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 20px rgba(255, 20, 147, 0.2);
+    padding: 1rem;
+  }
+}
+
+/* Dark mode - adjust content containers */
+:root[data-scheme='dark'] {
+  .bg-pink-goats,
+  .bg-pixel-stars,
+  .bg-pixel-hearts,
+  .bg-hot-pink-goats,
+  .bg-geocities {
+    .article-list,
+    article,
+    aside,
+    footer {
+      background: rgba(30, 30, 30, 0.95) !important;
+      backdrop-filter: blur(3px);
+      box-shadow: 0 4px 20px rgba(138, 43, 226, 0.3);
+      padding: 1rem;
+    }
+  }
+}
