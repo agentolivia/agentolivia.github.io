@@ -1,0 +1,15 @@
+name: Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    uses: ./.github/workflows/lint.yml
+
+  deploy:
+    needs: [lint]
+    uses: ./.github/workflows/deploy.yml
