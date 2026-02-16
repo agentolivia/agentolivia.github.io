@@ -1,9 +1,6 @@
 name: Build and deploy
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_call:
 permissions:
   contents: read
   pages: write
@@ -64,8 +61,6 @@ jobs:
       - name: Install Node.js dependencies
         run: |
           [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true
-      - name: Security audit
-        run: npm audit --audit-level=moderate # append ` || true` to show audit results without blocking build
       - name: Configure Git
         run: |
           git config core.quotepath false

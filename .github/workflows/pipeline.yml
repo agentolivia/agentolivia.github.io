@@ -1,0 +1,23 @@
+name: Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    uses: ./.github/workflows/lint.yml
+
+  security:
+    uses: ./.github/workflows/security.yml
+
+  deploy:
+    needs: [lint, security]
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy.yml
