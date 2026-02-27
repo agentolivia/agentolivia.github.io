@@ -1,6 +1,6 @@
 ---
 title: 'New Site, Who Dis'
-description:
+description: Notes on setting up my Hugo site using the repo template, CaiJimmy/hugo-theme-stack-starter.
 date: 2026-02-09T15:18:13-08:00
 image: screenshot-new-site-who-dis-commit.png
 draft: false
@@ -8,7 +8,7 @@ comments: false
 build:
   list: always # Change to "never" to hide the page from the list
 categories:
-  - Tech
+  - Tutorials
 tags:
   - Hugo
   - GitHub
