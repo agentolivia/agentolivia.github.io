@@ -18,3 +18,5 @@ resources/
 
 # Other
 .DS_Store
+
+layouts/
