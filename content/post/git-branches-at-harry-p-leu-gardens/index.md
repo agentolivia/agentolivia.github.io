@@ -1,6 +1,6 @@
 ---
-title: 'I Went to a Botanical Garden and All I Saw Was Git'
-description: 'During my visit to Harry P Leu Gardens after Florida DrupalCamp, I think I may have found the source of inspiration for Git version control.'
+title: 'Git Out'
+description: 'During my visit to Harry P Leu Gardens after Florida DrupalCamp, I think I may have found the source of inspiration for many a git-based workflow.'
 date: 2026-02-27T15:38:06-08:00
 image: 00_Harry_P_Leu_Gardens_2026.jpg
 comments: true
