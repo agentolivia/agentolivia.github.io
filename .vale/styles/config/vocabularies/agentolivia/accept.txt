@@ -16,3 +16,9 @@ Unsplash
 cron
 Flickr
 lightbox
+Matz
+Hineline
+obvs
+Dependabot
+hotfix
+hotfixes

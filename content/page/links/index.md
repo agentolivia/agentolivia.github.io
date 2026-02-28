@@ -1,10 +1,19 @@
 ---
 title: Links
 links:
-  - title: GitHub
-    description: GitHub is the world's largest software development platform.
-    website: https://github.com
+  - title: agentolivia/agentolivia.github.io
+    description: The git repository for this site
+    website: https://github.com/agentolivia/agentolivia.github.io
     image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+  - title: 'Slides: Build Your First CI/CD Pipeline'
+    description: The slides for my presentation, Build Your First CI/CD Pipeline (and Add a QA Check While You're At It), hosted on SpeakerDeck
+    website: https://speakerdeck.com/agentolivia/cd-pipeline-and-add-a-qa-check-while-youre-at-it
+  - title: My Florida DrupalCamp Session Page
+    description: Session page for Build Your First CI/CD Pipeline (and Add a QA Check While You're At It) on the florida
+    website: https://www.fldrupal.camp/session/build-your-first-cicd-pipeline-and-add-qa-check-while-youre-it
+  - title: FLDC 2026 presentation playlist
+    description: All session recordings from Florida DrupalCamp 2026 on Drupal.TV
+    website: https://drupal.tv/events/florida-drupalcamp/florida-drupalcamp-2026
 menu:
   main:
     weight: 4
@@ -14,20 +23,4 @@ menu:
 comments: false
 ---
 
-To use this feature, add `links` section to frontmatter.
-
-This page's frontmatter:
-
-```yaml
-links:
-  - title: GitHub
-    description: GitHub is the world's largest software development platform.
-    website: https://github.com
-    image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-  - title: TypeScript
-    description: TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
-    website: https://www.typescriptlang.org
-    image: ts-logo-128.jpg
-```
-
-`image` field accepts both local and external images.
+Related resources you may find useful.

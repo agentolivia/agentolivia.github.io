@@ -10,7 +10,7 @@ build:
 categories:
   - General
 tags:
-  - photography
+  - Photography
 ---
 
 Hello, friends. This is me saying hello with the help of my alpaca friend, well really he (she?) was just a brief acquaintance.
