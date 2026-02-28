@@ -11,11 +11,11 @@ categories:
   - Presentations
 
 tags:
-  - events
-  - tech
-  - recording
-  - devops
-  - github
+  - Events
+  - Tech
+  - Recording
+  - DevOps
+  - GitHub
   - CI/CD
 ---
 
