@@ -13,9 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
       contents: write
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +31,24 @@ jobs:
       - name: Tidy go.mod, go.sum
         run: hugo mod tidy
 
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Sync Hugo version in Tugboat config
+        run: |
+          HUGO_VERSION=$(hugo version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+          sed -i -E "s|/download/v[0-9.]+/hugo_extended_[0-9.]+_Linux-64bit|/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit|g" .tugboat/config.yml
+
+      - name: Build site
+        run: hugo --gc --minify
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
         with:
-          commit_message: 'CI: Update theme'
+          commit-message: 'CI: Update theme'
+          title: 'CI: Update theme'
+          body: |
+            Automated theme update via `hugo mod get -u`. Please review changes before merging.
+          branch: automated/update-theme
+          delete-branch: true
+          add-paths: |
+            go.mod
+            go.sum
+            .tugboat/config.yml

@@ -11,7 +11,7 @@ services:
         - curl -Ls https://go.dev/dl/go1.25.7.linux-amd64.tar.gz | tar -C /usr/local -xzf - && export PATH=$PATH:/usr/local/go/bin && go version
 
         # Install Hugo Extended and verify
-        - curl -Ls https://github.com/gohugoio/hugo/releases/download/v0.155.3/hugo_extended_0.155.3_Linux-64bit.tar.gz | tar -C /usr/local/bin -zxf - hugo && hugo version
+        - curl -Ls https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_extended_0.161.1_Linux-64bit.tar.gz | tar -C /usr/local/bin -zxf - hugo && hugo version
 
       build:
         # Build the site (export PATH and build in one command)
