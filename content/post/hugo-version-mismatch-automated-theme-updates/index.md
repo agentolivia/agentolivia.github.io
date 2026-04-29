@@ -23,7 +23,7 @@ I used Claude Code in VS Code to help me diagnose and fix the error, and we work
 
 ## The error
 
-```
+```shell
 WARN  Module "github.com/CaiJimmy/hugo-theme-stack/v4" is not compatible
       with this Hugo version: Min 0.157.0 extended
 ERROR error building site: ... at <reflect>: can't evaluate field
@@ -78,7 +78,7 @@ The core problem is that the workflow had no feedback loop: it updated the theme
 
 ### 1. Auto-sync the Tugboat Hugo version (automated)
 
-The workflow already installs the latest Hugo to run `hugo mod get -u`. So after updating the theme, I extract that version number and rewrite the download URL in `.tugboat/config.yml` to match:
+The workflow already installs the latest Hugo to run `hugo mod get -u`. After updating the theme, I extract that version number and rewrite the download URL in `.tugboat/config.yml` to match:
 
 ```yaml
 - name: Sync Hugo version in Tugboat config

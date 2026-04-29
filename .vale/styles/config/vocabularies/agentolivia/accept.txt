@@ -22,3 +22,4 @@ obvs
 Dependabot
 hotfix
 hotfixes
+config
