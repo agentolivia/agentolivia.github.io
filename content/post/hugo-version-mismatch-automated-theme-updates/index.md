@@ -1,6 +1,6 @@
 ---
 title: "When Your Theme Auto-Updates But Your Build Environment Doesn't"
-description: How a Hugo version mismatch broke my Tugboat preview build, and how I fixed the workflow to catch this automatically — and add a human review step — in the future.
+description: How a Hugo version mismatch broke my Tugboat preview build, and how I fixed the workflow to catch this automatically—and add a human review step—in the future.
 date: 2026-04-29T00:00:00-07:00
 draft: false
 comments: false
@@ -30,7 +30,7 @@ ERROR error building site: ... at <reflect>: can't evaluate field
       IsImageResourceWithMeta in type interface {}
 ```
 
-Two errors, one cause. The theme ([hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack)) had been auto-updated to a version that requires Hugo **0.157.0 extended** as a minimum. My Tugboat config was pinned to **Hugo 0.155.3**. The `IsImageResourceWithMeta` template error isn't a separate bug — it's what happens when the theme tries to use a field that doesn't exist in the older Hugo version.
+Two errors, one cause. The theme ([hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack)) had been auto-updated to a version that requires Hugo **0.157.0 extended** as a minimum. My Tugboat config was pinned to **Hugo 0.155.3**. The `IsImageResourceWithMeta` template error isn't a separate bug—it's what happens when the theme tries to use a field that doesn't exist in the older Hugo version.
 
 ## How did this happen?
 
@@ -109,7 +109,7 @@ The result is stored in `HUGO_VERSION`.
 - `-E` — enables extended regex, needed for `+` to mean "one or more"
 - `s|...|...|g` — the substitute command, using `|` as the delimiter instead of the usual `/` because the pattern itself contains forward slashes, which would otherwise need escaping
 
-The pattern matches the version-specific portion of the Hugo download URL — `[0-9.]+` matches any version number like `0.155.3` or `0.161.1`. The replacement plugs `$HUGO_VERSION` into both spots where the version number appears. The `g` flag replaces all occurrences, though there's only one matching line in the file.
+The pattern matches the version-specific portion of the Hugo download URL—`[0-9.]+` matches any version number like `0.155.3` or `0.161.1`. The replacement plugs `$HUGO_VERSION` into both spots where the version number appears. The `g` flag replaces all occurrences, though there's only one matching line in the file.
 
 </details>
 
