@@ -1,6 +1,6 @@
 ---
 title: "When Your Theme Auto-Updates But Your Build Environment Doesn't"
-description: How a Hugo version mismatch broke my Tugboat preview build, and how I fixed the workflow to catch this automatically—and add a human review step—in the future.
+description: How a Hugo version mismatch broke my Tugboat preview build —and how I fixed the workflow to catch this automatically and add a human review step in the future.
 date: 2026-04-29T00:00:00-07:00
 draft: false
 comments: false
@@ -17,9 +17,9 @@ tags:
   - DevOps
 ---
 
-When I was poking around my [Tugboat Dashboard](https://dashboard.tugboatqa.com/), I noticed the base preview for the `main` branch on this repo had failed. The site was still working, and it wasn't until today that I needed to get pull request previews up-and-running again for this repo. The error was a bit cryptic at first glance, but it turned out to be a straightforward version mismatch with a less-than-straightforward paper trail.
+While poking around my [Tugboat Dashboard](https://dashboard.tugboatqa.com/), I noticed the base preview for the main branch in this repo had failed. The site was still working, and it wasn’t until today that I needed to get pull request previews up and running again for this repo. The error was a bit cryptic at first glance, but it turned out to be a straightforward version mismatch with a less-than-straightforward paper trail.
 
-I used Claude Code in VS Code to help me diagnose and fix the error, and we worked together to devise a plan to update the update-theme workflow and Tugboat to be more **resilient to automatic changes and to put me—the human—in the loop when there was a need**. Claude Code helped me write a detailed PR description and turn this incident in a blog post, which I edited and added to. Robot teamwork!
+I used Claude Code in VS Code to help me diagnose and fix the error, and we worked together to devise a plan to update the update-theme workflow and Tugboat to be more **resilient to automatic changes and to put me—the human—in the loop when needed**. Claude Code helped me write a detailed PR description and turn this incident into a blog post, which I edited and added to. Robot teamwork!
 
 ## The error
 
