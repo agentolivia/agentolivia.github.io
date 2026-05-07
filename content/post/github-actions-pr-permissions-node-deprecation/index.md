@@ -93,19 +93,61 @@ Cross-workflow updates (applied to all five workflow files where used):
 
 ### Actions that don't have a Node.js 24 release yet
 
-Two actions were already at their latest major version, with no Node.js 24-compatible release available:
+One action was already at its latest major version with no Node.js 24-compatible release available:
 
-- `peaceiris/actions-hugo@v3` (used in `update-theme.yml` and `deploy.yml`)
 - `errata-ai/vale-action@v2` (used in `vale.yml`)
 
-For these, I added the opt-in environment variable to the affected jobs:
+For it, I added the opt-in environment variable to the affected job:
 
 ```yaml
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 ```
 
-This tells the runner to use Node.js 24 for those actions now, before GitHub forces it on June 2nd. Better to surface any compatibility issues on a PR than have them appear in production at the cutover. If either action breaks under Node.js 24, that's a signal to find an alternative or wait for an upstream update.
+This tells the runner to use Node.js 24 for that action now, before GitHub forces it on June 2nd. If it breaks, that's a signal to find an alternative or wait for an upstream update.
+
+`peaceiris/actions-hugo@v3` was in the same situation — no Node.js 24 release, same warning — but I replaced it entirely rather than applying the workaround. See below.
+
+### Replacing peaceiris/actions-hugo
+
+`peaceiris/actions-hugo@v3` is an unmaintained community wrapper that downloads Hugo from GitHub releases and puts it on PATH. Since it has no Node.js 24-native release and is just a thin wrapper around a direct download, the right move was to remove the dependency and do the download directly — the same pattern already used for Dart Sass in `deploy.yml`.
+
+In `deploy.yml`, where the Hugo version is pinned in an env var:
+
+```yaml
+- name: Setup Hugo
+  run: |
+    mkdir -p "${HOME}/.local/bin"
+    curl -sLo "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" \
+      "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+    curl -sLo "hugo_checksums.txt" \
+      "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_checksums.txt"
+    sha256sum --check --ignore-missing "hugo_checksums.txt"
+    tar -C "${HOME}/.local/bin" -xf "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" hugo
+    rm "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" "hugo_checksums.txt"
+    echo "${HOME}/.local/bin" >> "${GITHUB_PATH}"
+```
+
+In `update-theme.yml`, where the workflow always wants the latest Hugo:
+
+```yaml
+- name: Setup Hugo
+  env:
+    GH_TOKEN: ${{ github.token }}
+  run: |
+    HUGO_VERSION=$(gh release view --repo gohugoio/hugo --json tagName --jq '.tagName | ltrimstr("v")')
+    mkdir -p "${HOME}/.local/bin"
+    curl -sLo "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" \
+      "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+    curl -sLo "hugo_checksums.txt" \
+      "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_checksums.txt"
+    sha256sum --check --ignore-missing "hugo_checksums.txt"
+    tar -C "${HOME}/.local/bin" -xf "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" hugo
+    rm "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" "hugo_checksums.txt"
+    echo "${HOME}/.local/bin" >> "${GITHUB_PATH}"
+```
+
+The `sha256sum --check --ignore-missing` step verifies the tarball against Hugo's published checksums file before extracting. `--ignore-missing` is needed because the checksums file covers all platforms and editions; we only downloaded one of them. This is something `peaceiris/actions-hugo` never did, so the replacement is actually a supply chain improvement over what it replaced.
 
 ### Aligning the pinned Node.js version
 
