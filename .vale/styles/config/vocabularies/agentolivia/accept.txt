@@ -23,3 +23,5 @@ Dependabot
 hotfix
 hotfixes
 config
+cutover
+allowlist
