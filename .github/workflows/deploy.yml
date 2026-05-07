@@ -16,13 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DART_SASS_VERSION: 1.97.1
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       GO_VERSION: 1.25.7
       HUGO_VERSION: 0.155.3
       NODE_VERSION: 24.12.0
       TZ: America/Los_Angeles
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: recursive
           fetch-depth: 0
@@ -32,7 +33,7 @@ jobs:
           go-version: ${{ env.GO_VERSION }}
           cache: false
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Setup Pages

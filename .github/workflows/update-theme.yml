@@ -16,8 +16,11 @@ jobs:
       contents: write
       pull-requests: write
 
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
@@ -40,7 +43,7 @@ jobs:
         run: hugo --gc --minify
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           commit-message: 'CI: Update theme'
           title: 'CI: Update theme'
