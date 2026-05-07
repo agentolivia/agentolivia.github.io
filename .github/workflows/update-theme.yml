@@ -16,17 +16,21 @@ jobs:
       contents: write
       pull-requests: write
 
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
     steps:
       - uses: actions/checkout@v6
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: 'latest'
-          extended: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          HUGO_VERSION=$(gh release view --repo gohugoio/hugo --json tagName --jq '.tagName | ltrimstr("v")')
+          mkdir -p "${HOME}/.local/bin"
+          curl -sLo "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          curl -sLo "hugo_checksums.txt" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_checksums.txt"
+          sha256sum --check --ignore-missing "hugo_checksums.txt"
+          tar -C "${HOME}/.local/bin" -xf "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" hugo
+          rm "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" "hugo_checksums.txt"
+          echo "${HOME}/.local/bin" >> "${GITHUB_PATH}"
 
       - name: Update theme
         run: hugo mod get -u
