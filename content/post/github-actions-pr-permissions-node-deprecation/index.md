@@ -112,7 +112,7 @@ This tells the runner to use Node.js 24 for that action now, before GitHub force
 
 `peaceiris/actions-hugo@v3` is an unmaintained community wrapper that downloads Hugo from GitHub releases and puts it on PATH. Since it has no Node.js 24-native release and is just a thin wrapper around a direct download, the right move was to remove the dependency and do the download directly — the same pattern already used for Dart Sass in `deploy.yml`.
 
-In `deploy.yml`, where the Hugo version is pinned in an env var:
+In `deploy.yml`, where the Hugo version is pinned in an environment variable:
 
 ```yaml
 - name: Setup Hugo
