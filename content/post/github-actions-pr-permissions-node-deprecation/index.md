@@ -17,7 +17,7 @@ tags:
   - Claude Code
 ---
 
-In [my last post](/post/hugo-version-mismatch-automated-theme-updates/), I updated the `update-theme` workflow to open a pull request instead of committing theme updates directly to `main`. Smart in theory. In practice, when the workflow needed to open a pull request to bump the hugo version, it failed. The workflow run also warned me about Node 20 actions being deprecated.
+In [my last post](/post/hugo-version-mismatch-automated-theme-updates/), I updated the `update-theme` workflow to open a pull request instead of committing theme updates directly to `main`. Smart in theory. In practice, when the workflow needed to open a pull request to bump the `hugo` version, it failed. The workflow run also warned me about Node 20 actions being deprecated.
 
 I used Claude Code to help diagnose and work through both issues. This post is my note-to-future-self on what needed to change and where.
 
@@ -43,7 +43,7 @@ Go to **Settings → Actions → General** and look at the "Actions permissions"
 
 Here's what I added:
 
-```
+```txt
 peaceiris/actions-hugo@*,
 peter-evans/create-pull-request@*,
 errata-ai/vale-action@*
