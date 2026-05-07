@@ -71,7 +71,9 @@ This affected every workflow in the repo, not just `update-theme`. Claude Code h
 
 ### Action version bumps
 
-Several actions had new major versions available with Node.js 24 support:
+Several actions had new major versions available with Node.js 24 support.
+
+Cross-workflow updates (applied to all five workflow files where used):
 
 | Action                            | Before  | After  |
 | --------------------------------- | ------- | ------ |
@@ -79,7 +81,15 @@ Several actions had new major versions available with Node.js 24 support:
 | `actions/setup-node`              | v4      | **v6** |
 | `peter-evans/create-pull-request` | v7      | **v8** |
 
-These were updated across all five workflow files.
+`deploy.yml`-specific updates:
+
+| Action                        | Before | After  |
+| ----------------------------- | ------ | ------ |
+| `actions/setup-go`            | v5     | **v6** |
+| `actions/configure-pages`     | v5     | **v6** |
+| `actions/cache`               | v4     | **v5** |
+| `actions/upload-pages-artifact` | v3   | **v5** |
+| `actions/deploy-pages`        | v4     | **v5** |
 
 ### Actions that don't have a Node.js 24 release yet
 
