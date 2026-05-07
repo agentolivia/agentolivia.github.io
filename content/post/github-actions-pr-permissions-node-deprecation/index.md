@@ -2,7 +2,7 @@
 title: "Fixing error: GitHub Actions isn't allowed to open pull requests"
 description: After setting up the update-theme workflow to open PRs instead of pushing directly to main, I immediately found it wasn't actually allowed to do that. Then it complained about Node.js 20 actions being deprecated. Here's how I fixed both.
 date: 2026-05-06T00:00:00-07:00
-draft: true
+draft: false
 comments: false
 build:
   list: always
