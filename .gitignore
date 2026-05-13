@@ -17,5 +17,8 @@ pnpm-lock.yaml    # if you're using pnpm
 .vscode/
 .idea/
 
+# Claude Code local config
+.claude/
+
 # OS files
 Thumbs.db
