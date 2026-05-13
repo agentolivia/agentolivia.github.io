@@ -12,6 +12,9 @@ on:
 jobs:
   vale:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
 
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -19,9 +22,11 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Run Vale
-        uses: errata-ai/vale-action@v2
+        uses: errata-ai/vale-action@d89dee975228ae261d22c15adcd03578634d429c # v2
         with:
           files: content
           fail_on_error: true
