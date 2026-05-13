@@ -5,7 +5,7 @@ description:
   supply chain attacks via third-party GitHub Actions and npm, plus a prompt
   you can use to run the same review on your own repo.
 date: 2026-05-13T00:00:00-07:00
-draft: true
+draft: false
 comments: false
 build:
   list: always
