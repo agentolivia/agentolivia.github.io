@@ -25,3 +25,7 @@ hotfixes
 config
 cutover
 allowlist
+npm
+SHA
+SHAs
+postinstall
