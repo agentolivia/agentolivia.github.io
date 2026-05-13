@@ -41,7 +41,7 @@ GitHub's version tags (e.g., `@v2`, `@v8`) are mutable. A tag can be moved to po
 
 Git tags are just labels. The `v8` tag is a pointer, and whoever controls the repo can move it to a different commit. Same name, different code. That's what mutable means here.
 
-A commit SHA is different. Git derives it from the commit's content, so it can only refer to that one thing. You can't redirect it.
+A commit SHA is different. Git derives it from the content of the commit, so it can only refer to that one thing. You can't redirect it.
 
 That's what makes SHA pinning an actual security control. Once you've reviewed what's at a given SHA, nobody can swap something else in without you noticing.
 
@@ -106,7 +106,7 @@ jobs:
     timeout-minutes: 5
 ```
 
-Each of these jobs completes in seconds, with the build and deploy pipeline taking under two minutes. I set all jobs to 5 minutes. That's a reasonable buffer given actual runtimes, and a lot better than leaving the 6-hour default in place.
+Each of these jobs completes in seconds, with the build and deploy pipeline taking under two minutes. I set all jobs to 5 minutes. That's a reasonable buffer given actual run times, and a lot better than leaving the 6-hour default in place.
 
 ## The prompt
 
