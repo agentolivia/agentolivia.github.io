@@ -69,7 +69,7 @@ GitHub's own first-party `actions/*` are lower risk, but if your threat model re
 
 ### 2. Add explicit `permissions` blocks
 
-Without an explicit `permissions` block, a workflow job inherits the repository's default token permissions, which can be `read/write` depending on repo settings. Declaring minimum permissions limits what an attacker can do with a compromised token.
+Without an explicit `permissions` block, a workflow job inherits the repository's default token permissions, which can be `read/write` depending on repo settings. Declaring minimum permissions limits what an attacker can do with a compromised token. This is the security principle of "least privilege."
 
 Three of my workflow files had no `permissions` block at all:
 
