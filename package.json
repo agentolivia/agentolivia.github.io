@@ -21,7 +21,11 @@
     "lint:markdown:fix": "markdownlint-cli2 --fix '**/*.md'"
   },
   "devDependencies": {
-    "markdownlint-cli2": "^0.21.0",
+    "markdownlint-cli2": "^0.22.1",
     "prettier": "^3.8.1"
+  },
+  "overrides": {
+    "js-yaml": "^4.2.0",
+    "markdown-it": "^14.2.0"
   }
 }
