@@ -10,12 +10,15 @@ services:
         # Install Go and verify
         - curl -Ls https://go.dev/dl/go1.25.7.linux-amd64.tar.gz | tar -C /usr/local -xzf - && export PATH=$PATH:/usr/local/go/bin && go version
 
+        # Install Dart Sass (required by hugo-theme-stack v4) and verify
+        - curl -Ls https://github.com/sass/dart-sass/releases/download/1.97.1/dart-sass-1.97.1-linux-x64.tar.gz | tar -C /usr/local -zxf - && /usr/local/dart-sass/sass --version
+
         # Install Hugo Extended and verify
         - curl -Ls https://github.com/gohugoio/hugo/releases/download/v0.163.3/hugo_extended_0.163.3_Linux-64bit.tar.gz | tar -C /usr/local/bin -zxf - hugo && hugo version
 
       build:
         # Build the site (export PATH and build in one command)
-        - export PATH=$PATH:/usr/local/go/bin && cd "${TUGBOAT_ROOT}" && hugo --gc --minify
+        - export PATH=$PATH:/usr/local/go/bin:/usr/local/dart-sass && cd "${TUGBOAT_ROOT}" && hugo --gc --minify
 
         # Link the generated public directory to Apache's document root
         - ln -snf "${TUGBOAT_ROOT}/public" "${DOCROOT}"
