@@ -16,9 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      DART_SASS_VERSION: 1.97.1
-      GO_VERSION: 1.25.7
-      HUGO_VERSION: 0.161.1
       NODE_VERSION: 24.12.0
       TZ: America/Los_Angeles
     steps:
@@ -27,6 +24,9 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Load pinned tool versions
+        run: |
+          grep -E '^[A-Z_]+=' versions.env >> "${GITHUB_ENV}"
       - name: Setup Go
         uses: actions/setup-go@v6
         with:

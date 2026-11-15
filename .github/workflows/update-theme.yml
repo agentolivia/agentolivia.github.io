@@ -1,12 +1,19 @@
 name: Update theme
 
-# Controls when the workflow will run
+# Manual only: run it from the Actions tab when you want to upgrade.
+# It updates the theme and the pinned tool versions in versions.env together,
+# builds the site with exactly those versions, and opens a PR to review.
 on:
-  schedule:
-    # Update theme automatically everyday at 00:00 UTC
-    - cron: '0 0 * * *'
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      hugo_version:
+        description: "Hugo version: 'latest', 'pinned' (keep current), or a number like 0.161.1"
+        required: true
+        default: latest
+      dart_sass_version:
+        description: "Dart Sass version: 'latest', 'pinned' (keep current), or a number like 1.97.1"
+        required: true
+        default: latest
 
 jobs:
   update-theme:
@@ -20,26 +27,56 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      # hugo-theme-stack v4 compiles SCSS with Dart Sass
-      - name: Install Dart Sass
+      - name: Resolve tool versions and update versions.env
         env:
           GH_TOKEN: ${{ github.token }}
+          HUGO_INPUT: ${{ inputs.hugo_version }}
+          SASS_INPUT: ${{ inputs.dart_sass_version }}
         run: |
-          DART_SASS_VERSION=$(gh release view --repo sass/dart-sass --json tagName --jq '.tagName')
+          set -euo pipefail
+          . ./versions.env
+
+          resolve() { # resolve <input> <pinned> <repo>
+            case "$1" in
+              pinned) echo "$2" ;;
+              latest) gh release view --repo "$3" --json tagName --jq '.tagName' | sed 's/^v//' ;;
+              *) echo "$1" ;;
+            esac
+          }
+          NEW_HUGO=$(resolve "${HUGO_INPUT}" "${HUGO_VERSION}" gohugoio/hugo)
+          NEW_SASS=$(resolve "${SASS_INPUT}" "${DART_SASS_VERSION}" sass/dart-sass)
+
+          for v in "${NEW_HUGO}" "${NEW_SASS}"; do
+            [[ "$v" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::Invalid version: $v"; exit 1; }
+          done
+
+          sed -i -E "s/^HUGO_VERSION=.*/HUGO_VERSION=${NEW_HUGO}/; s/^DART_SASS_VERSION=.*/DART_SASS_VERSION=${NEW_SASS}/" versions.env
+          grep -q "^HUGO_VERSION=${NEW_HUGO}$" versions.env && grep -q "^DART_SASS_VERSION=${NEW_SASS}$" versions.env \
+            || { echo "::error::Failed to update versions.env"; exit 1; }
+
+          grep -E '^[A-Z_]+=' versions.env >> "${GITHUB_ENV}"
+          echo "Hugo ${HUGO_VERSION} -> ${NEW_HUGO}, Dart Sass ${DART_SASS_VERSION} -> ${NEW_SASS}"
+
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: false
+
+      # hugo-theme-stack v4 compiles SCSS with Dart Sass
+      - name: Install Dart Sass
+        run: |
           mkdir -p "${HOME}/.local"
-          curl -sLo "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          curl -fsSLo "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
           tar -C "${HOME}/.local" -xf "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
           rm "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
           echo "${HOME}/.local/dart-sass" >> "${GITHUB_PATH}"
 
       - name: Setup Hugo
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
-          HUGO_VERSION=$(gh release view --repo gohugoio/hugo --json tagName --jq '.tagName | ltrimstr("v")')
           mkdir -p "${HOME}/.local/bin"
-          curl -sLo "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
-          curl -sLo "hugo_checksums.txt" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_checksums.txt"
+          curl -fsSLo "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          curl -fsSLo "hugo_checksums.txt" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_checksums.txt"
           sha256sum --check --ignore-missing "hugo_checksums.txt"
           tar -C "${HOME}/.local/bin" -xf "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" hugo
           rm "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" "hugo_checksums.txt"
@@ -51,24 +88,24 @@ jobs:
       - name: Tidy go.mod, go.sum
         run: hugo mod tidy
 
-      - name: Sync Hugo version in Tugboat config
-        run: |
-          HUGO_VERSION=$(hugo version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
-          sed -i -E "s|/download/v[0-9.]+/hugo_extended_[0-9.]+_Linux-64bit|/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit|g" .tugboat/config.yml
-
+      # Builds with the same versions production will use after merge
       - name: Build site
         run: hugo --gc --minify
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
         with:
-          commit-message: 'CI: Update theme'
-          title: 'CI: Update theme'
+          commit-message: 'CI: Update theme and tool versions'
+          title: 'CI: Update theme and tool versions'
           body: |
-            Automated theme update via `hugo mod get -u`. Please review changes before merging.
+            Manual update run. Changes:
+            - Theme: `hugo mod get -u` (see `go.mod` / `go.sum`)
+            - Hugo: ${{ env.HUGO_VERSION }}, Dart Sass: ${{ env.DART_SASS_VERSION }} (see `versions.env`)
+
+            `versions.env` is read by the deploy workflow and Tugboat, so production and previews both use these versions. Check the Tugboat preview before merging.
           branch: automated/update-theme
           delete-branch: true
           add-paths: |
             go.mod
             go.sum
-            .tugboat/config.yml
+            versions.env
