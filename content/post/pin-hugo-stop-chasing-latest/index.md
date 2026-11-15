@@ -1,8 +1,8 @@
 ---
 title: 'Why I Stopped Auto-Updating Hugo (and My Theme)'
 description: My fix for a Hugo version mismatch quietly created a new one. Here's why I pinned Hugo, Dart Sass, and Go in one file and made theme updates something I run on purpose.
-date: 2026-11-15T00:00:00-08:00
-draft: true
+date: 2026-11-14T18:01:37-08:00
+draft: false
 comments: false
 build:
   list: always
